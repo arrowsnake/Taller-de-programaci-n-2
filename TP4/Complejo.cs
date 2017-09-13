@@ -7,7 +7,7 @@ namespace TP4
         private double iReal;
         private double iImaginario;
 
-        public Complejo(double pReal, double pImaginario)
+        public Complejo(double pReal, double pImaginario) //Constructor, para instanciar un objeto de clase complejo.
         {
             this.iReal = pReal;
             this.iImaginario = pImaginario;
