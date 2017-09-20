@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TP4
+namespace Ejercicio4
 {
     public class Complejo
     {

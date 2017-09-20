@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TP4
+namespace Ejercicio4
 {
     class Program
     {
-
 
         static void Main(string[] args)
         {
