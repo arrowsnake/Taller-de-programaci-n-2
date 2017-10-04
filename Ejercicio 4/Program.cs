@@ -148,7 +148,9 @@ namespace Ejercicio4
         /// <summary>
         /// Muestra al número complejo en su forma: a + bi
         /// </summary>
-        /// <param name="pComplejo"></param>
+        /// <param name="pComplejo">
+        /// Complejo que se quiere representar
+        /// </param>
         /// <returns></returns>
         static string MostrarComplejo(Complejo pComplejo) 
         {

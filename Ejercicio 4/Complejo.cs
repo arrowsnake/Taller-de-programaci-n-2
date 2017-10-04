@@ -2,16 +2,24 @@
 
 namespace Ejercicio4
 {
+    /// <summary>
+    /// Clase que representa a un número complejo
+    /// </summary>
     public class Complejo
     {
         private double iReal;
         private double iImaginario;
+        
 
         /// <summary>
         /// Constructor que se encarga de instanciar un objeto de clase Complejo
         /// </summary>
-        /// <param name="pReal"></param>
-        /// <param name="pImaginario"></param>
+        /// <param name="pReal">
+        /// Término real del complejo
+        /// </param>
+        /// <param name="pImaginario">
+        /// Término imaginario del complejo
+        /// </param>
         public Complejo(double pReal, double pImaginario)
         {
             this.iReal = pReal;
@@ -64,7 +72,9 @@ namespace Ejercicio4
         /// <summary>
         /// Compara con otro complejo, es verdadero si son iguales
         /// </summary>
-        /// <param name="pOtroComplejo"></param>
+        /// <param name="pOtroComplejo">
+        /// Complejo con el que se compara
+        /// </param>
         /// <returns></returns>
 
         public bool EsIgual(Complejo pOtroComplejo) 
@@ -111,7 +121,9 @@ namespace Ejercicio4
         /// <summary>
         /// devuelve el resultado de la suma con otro complejo
         /// </summary>
-        /// <param name="pOtroComplejo"></param>
+        /// <param name="pOtroComplejo">
+        /// Complejo que queremos sumar
+        /// </param>
         /// <returns></returns>
         public Complejo Sumar (Complejo pOtroComplejo) 
         {
@@ -121,7 +133,9 @@ namespace Ejercicio4
         /// <summary>
         /// Devuelve el resultado de la resta con otro complejo
         /// </summary>
-        /// <param name="pOtroComplejo"></param>
+        /// <param name="pOtroComplejo">
+        /// Complejo que queremos restar
+        /// </param>
         /// <returns></returns>
         public Complejo Restar(Complejo pOtroComplejo) 
         {
@@ -131,7 +145,9 @@ namespace Ejercicio4
         /// <summary>
         /// Devuelve el resultado de la multiplicación con otro complejo
         /// </summary>
-        /// <param name="pOtroComplejo"></param>
+        /// <param name="pOtroComplejo">
+        /// Complejo que queremos multiplicar
+        /// </param>
         /// <returns></returns>
         public Complejo Multiplicar(Complejo pOtroComplejo)
         {
@@ -141,7 +157,9 @@ namespace Ejercicio4
         /// <summary>
         /// Devuelve el resultado de la división con otro complejo
         /// </summary>
-        /// <param name="pOtroComplejo"></param>
+        /// <param name="pOtroComplejo">
+        /// Complejo que hace del divisor
+        /// </param>
         /// <returns></returns>
         public Complejo Dividir(Complejo pOtroComplejo)
         {
