@@ -150,7 +150,7 @@ namespace Ejercicio4
         /// </summary>
         /// <param name="pComplejo"></param>
         /// <returns></returns>
-        static string MostrarComplejo(Complejo pComplejo) //Un método para mostrar en string el número imaginario en el formato "a + bi" o "a - bi"
+        static string MostrarComplejo(Complejo pComplejo) 
         {
 
             if (pComplejo.EsReal())

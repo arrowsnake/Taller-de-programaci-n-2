@@ -10,7 +10,7 @@ namespace Ejercicio1
     {
         static void Main(string[] args)
         {
-            FachadaGeometria fachada = new FachadaGeometria();          //creo un objeto de clase fachada
+            FachadaGeometria fachada = new FachadaGeometria();          //creo un objeto de clase FachadaGeometria, que será el controlador
             Console.WriteLine("INGRESE LA OPCIÓN QUE SOLICITE REALIZAR");
             Console.WriteLine("1- Calcular distancia entre 2 puntos");
             Console.WriteLine("2- Ingrese un círculo");
@@ -69,7 +69,7 @@ namespace Ejercicio1
                     Console.Write("Ingrese la coordenada Y del tercer punto: ");
                     y3 = Convert.ToDouble(Console.ReadLine());
 
-                    double mAreaT = fachada.calcularAreaTriangulo(x1, x2, x3, y1, y2, y3);  //utiliza la fachada para calcular y guarda en una variable para utilizarlo luego
+                    double mAreaT = fachada.calcularAreaTriangulo(x1, x2, x3, y1, y2, y3);  //utiliza la fachada para calcular el arae del triangulo y guarda la dovolución en una variable para utilizarlo luego
 
                     Console.WriteLine("El área del triangulo es: " + mAreaT);
                     break;

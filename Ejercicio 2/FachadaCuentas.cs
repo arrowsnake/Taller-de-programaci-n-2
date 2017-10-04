@@ -4,9 +4,13 @@ namespace Ejercicio2
 {
     internal class FachadaCuentas
     {
-        private Cuentas iCuentasDelCliente;
+        public Cliente iCliente = null;         //se le asigna null para que ingrese al if del segundo caso del switch hasta ingresar un cliente
+        public Cuentas iCuentasDelCliente;
 
-        internal TipoDocumento elegirTipoDocumento()            //este metodo asigna un tipo de documento
+        /// <summary>
+        /// método que asigna a un cliente un tipo de documento
+        /// </summary>
+        internal TipoDocumento elegirTipoDocumento()           
         {
             switch (Convert.ToInt32(Console.ReadLine()))
             {
@@ -26,62 +30,126 @@ namespace Ejercicio2
             }
         }
 
-        internal Cliente agregarCliente(TipoDocumento pTipoDocumento, int pNroDocumento, string pNombre)    //metodo que crea al cliente con el que se realizarán las operaciones luego
+        /// <summary>
+        /// método que crea al cliente con el que se realizarán las operaciones luego
+        /// </summary>
+        /// <param name="pTipoDocumento">
+        /// de tipo TipoDocumento, contendrá el tipo de documento elegido del cliente
+        /// </param>
+        /// <param name="pNroDocumento">
+        /// de tipo int, contendrá el número del documento del cliente
+        /// </param>
+        /// <param name="pNombre">
+        /// de tipo string, contendrá el nombre del cliente
+        /// </param>
+        internal void agregarCliente(TipoDocumento pTipoDocumento, int pNroDocumento, string pNombre)    
         {
-            return (new Cliente(pTipoDocumento, pNroDocumento, pNombre));
-        }
-        
-        internal Cuentas inicializarCuentas(Cliente pCliente)   //metodo que utiliza el constructor de la clase Cuentas para inicilizar cuentas a un cliente
-        {
-            iCuentasDelCliente = new Cuentas(pCliente);
-            return (iCuentasDelCliente);
-        }
-
-        internal Cuenta inicializarCuentaCorrienteConAcuerdo(double pAcuerdo)   //metodo que utiliza el constructor de la clase Cuenta con 1 parametro para asignar un monto de acuerdo a la cuenta corriente del cliente en cuestion
-        {
-            return (iCuentasDelCliente.cuentaCorriente = new Cuenta(pAcuerdo));
-        }
-
-        internal Cuenta inicializarCuentaCorrienteConAcuerdoYSaldo(double pAcuerdo, double pSaldo)  //metodo que utiliza el constructor de la clase Cuenta con 2 parametros para asignar un monto de acuerdo y un monto de saldo a la cuenta corriente del cliente en cuestion
-        {
-            return (iCuentasDelCliente.cuentaCorriente = new Cuenta(pSaldo, pAcuerdo));
+            iCliente = new Cliente(pTipoDocumento, pNroDocumento, pNombre);
         }
 
-        internal Cuenta inicializarCajaDeAhorroConAcuerdo(double pAcuerdo)  //metodo que utiliza el constructor de la clase Cuenta con 1 parametro para asignar un monto de acuerdo a la caja de ahorro del cliente en cuestion
+        /// <summary>
+        /// metodo que utiliza el constructor de la clase "Cuentas" para inicilizar cuentas a un cliente
+        /// </summary>
+        internal void inicializarCuentas()   
         {
-            return (iCuentasDelCliente.cajaAhorro = new Cuenta(pAcuerdo));
+            iCuentasDelCliente = new Cuentas(iCliente);
         }
 
-        internal Cuenta inicializarCajaDeAhorroConAcuerdoYSaldo(double pAcuerdo, double pSaldo) //metodo que utiliza el constructor de la clase Cuenta con 2 parametros para asignar un monto de acuerdo y un monto de saldo a la caja de ahorro del cliente en cuestion
+        /// <summary>
+        /// método que utiliza el constructor de la clase "Cuenta" con 1 parametro para asignar un monto de acuerdo a la cuenta corriente del cliente en cuestion
+        /// </summary>
+        internal void inicializarCuentaCorrienteConAcuerdo(double pAcuerdo)   
         {
-            return (iCuentasDelCliente.cajaAhorro = new Cuenta(pSaldo, pAcuerdo));
+            iCuentasDelCliente.cuentaCorriente = new Cuenta(pAcuerdo);
         }
 
-        internal double debitarCuentaCorriente(double pSaldo, Cuentas pCuentas)     //llama al metodo de la clase Cuenta que resta un saldo para la cuenta corriente
+        /// <summary>
+        /// método que utiliza el constructor de la clase "Cuenta" con 2 parametros para asignar un monto de acuerdo y un monto de saldo a la cuenta corriente del cliente en cuestion
+        /// </summary>
+        internal void inicializarCuentaCorrienteConAcuerdoYSaldo(double pAcuerdo, double pSaldo)  
         {
-            pCuentas.cuentaCorriente.debitarSaldo(pSaldo);
-            return (pCuentas.cuentaCorriente.saldo);
+            iCuentasDelCliente.cuentaCorriente = new Cuenta(pSaldo, pAcuerdo);
         }
 
-        internal double debitarCajaAhorro(double pSaldo, Cuentas pCuentas)      //llama al metodo de la clase Cuenta que resta un saldo para la caja de ahorro
+        /// <summary>
+        /// método que utiliza el constructor de la clase "Cuenta" con 1 parametro para asignar un monto de acuerdo a la caja de ahorro del cliente en cuestion
+        /// </summary>
+        internal void inicializarCajaDeAhorroConAcuerdo(double pAcuerdo)  
         {
-            pCuentas.cajaAhorro.debitarSaldo(pSaldo);
-            return (pCuentas.cajaAhorro.saldo);
+            iCuentasDelCliente.cajaAhorro = new Cuenta(pAcuerdo);
         }
 
-        internal double acreditarCuentaCorriente(double pSaldo, Cuentas pCuentas)   //llama al metodo de la clase Cuenta que suma un saldo para la cuenta corriente
+        /// <summary>
+        /// método que utiliza el constructor de la clase "Cuenta" con 2 parametros para asignar un monto de acuerdo y un monto de saldo a la caja de ahorro del cliente en cuestion
+        /// </summary>
+        internal void inicializarCajaDeAhorroConAcuerdoYSaldo(double pAcuerdo, double pSaldo) 
         {
-            pCuentas.cuentaCorriente.acreditarSaldo(pSaldo);
-            return (pCuentas.cuentaCorriente.saldo);
+            iCuentasDelCliente.cajaAhorro = new Cuenta(pSaldo, pAcuerdo);
         }
 
-        internal double acreditarCajaAhorro(double pSaldo, Cuentas pCuentas)    //llama al metodo de la clase Cuenta que suma un saldo para la caja de ahorro
+        /// <summary>
+        /// llama al método de la clase "Cuenta" que resta un saldo para la cuenta corriente
+        /// </summary>
+        /// <returns>
+        /// el saldo luego de intentar debitarlo
+        /// </returns>
+        internal double debitarCuentaCorriente(double pSaldo)    
         {
-            pCuentas.cajaAhorro.acreditarSaldo(pSaldo);
-            return (pCuentas.cajaAhorro.saldo);
+            if (iCuentasDelCliente.cuentaCorriente.debitarSaldo(pSaldo))
+            {
+                return (iCuentasDelCliente.cuentaCorriente.saldo);
+            }
+            else
+            {
+                Console.WriteLine("no es posible debitar el saldo");
+                return (iCuentasDelCliente.cuentaCorriente.saldo);
+            }
+
         }
 
-        internal void actualizarAcuerdo(Cuenta pCuenta)                 //modifica el valor de acuerdo de una cuenta
+        /// <summary>
+        /// llama al método de la clase "Cuenta" que resta un saldo para la caja de ahorro
+        /// </summary>
+        /// <returns>
+        /// el saldo luego de intentar debitarlo
+        /// </returns>
+        internal double debitarCajaAhorro(double pSaldo)      
+        {
+            iCuentasDelCliente.cajaAhorro.debitarSaldo(pSaldo);
+            return (iCuentasDelCliente.cajaAhorro.saldo);
+        }
+
+        /// <summary>
+        /// llama al método de la clase "Cuenta" que suma un saldo para la cuenta corriente
+        /// </summary>
+        /// <returns>
+        /// el saldo luego de aumentarlo
+        /// </returns>
+        internal double acreditarCuentaCorriente(double pSaldo)   
+        {
+            iCuentasDelCliente.cuentaCorriente.acreditarSaldo(pSaldo);
+            return (iCuentasDelCliente.cuentaCorriente.saldo);
+        }
+
+        /// <summary>
+        /// llama al método de la clase "Cuenta" que suma un saldo para la caja de ahorro
+        /// </summary>
+        /// <returns>
+        /// el saldo luego de aumentarlo
+        /// </returns>
+        internal double acreditarCajaAhorro(double pSaldo)    
+        {
+            iCuentasDelCliente.cajaAhorro.acreditarSaldo(pSaldo);
+            return (iCuentasDelCliente.cajaAhorro.saldo);
+        }
+
+        /// <summary>
+        /// modifica el valor de acuerdo de una cuenta
+        /// </summary>
+        /// <param name="pCuenta">
+        /// la cuenta que será actualizada
+        /// </param>
+        internal void actualizarAcuerdo(Cuenta pCuenta)               
         {
             pCuenta.acuerdo = Convert.ToDouble(Console.ReadLine());
         }

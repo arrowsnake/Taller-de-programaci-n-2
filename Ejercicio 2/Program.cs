@@ -12,12 +12,10 @@ namespace Ejercicio2
         {
             int iNroDocumento;
             string iNombre;
-            Cliente iCliente = null;        //se le asigna null para que ingrese al if del segundo caso del switch hasta ingresar un cliente
-            Cuentas iCuentas;
             double iAcuerdo;
             double iSaldo;
 
-            FachadaCuentas fachada = new FachadaCuentas();  //se asigna una clase FachadaCuentas a la variable fachada
+            FachadaCuentas fachada = new FachadaCuentas();  //creo un objeto de clase FachadaCuentas, que será el controlador
             bool pasa = true;                               //se utiliza esta variable para el default del switch dentro del siguiente while, para que no se repita infinitamente, esto pasa al asignarle false
 
             while (pasa == true)
@@ -35,7 +33,7 @@ namespace Ejercicio2
                         Console.WriteLine("3- CUIL");
                         Console.WriteLine("4- LE");
                         Console.WriteLine("5- LC");
-                        TipoDocumento mTipoDocumento = fachada.elegirTipoDocumento();       //asigno a la variable mTipoDocumento un metodo que asigna el tipo elegido
+                        TipoDocumento mTipoDocumento = fachada.elegirTipoDocumento();       
 
                         Console.WriteLine("> Ingrese el Nro de Documento <");
                         iNroDocumento = Convert.ToInt32(Console.ReadLine());
@@ -43,59 +41,64 @@ namespace Ejercicio2
                         Console.WriteLine("> Ingrese el nombre del Cliente <");
                         iNombre = Convert.ToString(Console.ReadLine());
 
-                        iCliente = fachada.agregarCliente(mTipoDocumento, iNroDocumento, iNombre);
+                        fachada.agregarCliente(mTipoDocumento, iNroDocumento, iNombre);
                         Console.WriteLine("El cliente ha sido agregado");
+                        Console.ReadKey();
+                        Console.Clear();
                         break;
 
                     case 2:
-                        if (iCliente == null)
+                        Console.Clear();
+                        if (fachada.iCliente == null)           //si esta variable de instancia está vacia querrá decir que el cliente no fue agregado
                         {
                             Console.WriteLine("No se ha agregado ningún Cliente");
                             break;
                         }
-                        else
+                        else                                    //si consigue acceder a esta parte del código es porque existe un cliente agregado
                         {
-                            Console.WriteLine("Cliente: " + (iCliente.nombre));
-                            Console.WriteLine("Con tipo de documento: " + (iCliente.tipoDocumento) + "  y Nro: " + (iCliente.tipoDocumento));
+                            Console.WriteLine("Cliente: " + (fachada.iCliente.nombre));
+                            Console.WriteLine("Con tipo de documento: " + (fachada.iCliente.tipoDocumento) + "  y Nro: " + (fachada.iCliente.tipoDocumento));
                             Console.WriteLine("> Si desea realizar una de estas acciones, toque la tecla indicada <");
-                            Console.WriteLine("0- Inicializar Cuenta Corriente con acuerdo");
-                            Console.WriteLine("1- Inicializar Cuenta Corriente con acuerdo y saldo");
-                            Console.WriteLine("2- Inicializar Caja de Ahorro con acuerdo");
-                            Console.WriteLine("3- Inicializar Caja de Ahorro con acuerdo y saldo");
+                            Console.WriteLine("1- Inicializar Cuenta Corriente con acuerdo");
+                            Console.WriteLine("2- Inicializar Cuenta Corriente con acuerdo y saldo");
+                            Console.WriteLine("3- Inicializar Caja de Ahorro con acuerdo");
+                            Console.WriteLine("4- Inicializar Caja de Ahorro con acuerdo y saldo");
 
-                            iCuentas = fachada.inicializarCuentas(iCliente);    //esta variable contendrá las cuentas del cliente
+                            fachada.inicializarCuentas();
 
                             switch (Convert.ToInt32(Console.ReadLine()))
                             {
-                                //dependiendo de qué elección de cuenta se inicialice, se inicializará posteriormente la siguiente con un saldo y acuerdo nulo
-                                case 0:
-                                    Console.Write("Ingrese el acuerdo de descubierto de la nueva cuenta: ");
-                                    iCuentas.cuentaCorriente = fachada.inicializarCuentaCorrienteConAcuerdo(Convert.ToDouble(Console.ReadLine()));
-                                    iCuentas.cajaAhorro = fachada.inicializarCajaDeAhorroConAcuerdo(0);
-                                    break;
                                 case 1:
                                     Console.Write("Ingrese el acuerdo de descubierto de la nueva cuenta: ");
-                                    iAcuerdo = Convert.ToDouble(Console.ReadLine());
-                                    Console.Write("Ingrese el saldo de la nueva cuenta: ");
-                                    iSaldo = Convert.ToDouble(Console.ReadLine());
-                                    iCuentas.cuentaCorriente = fachada.inicializarCuentaCorrienteConAcuerdoYSaldo(iAcuerdo, iSaldo);
-                                    iCuentas.cajaAhorro = fachada.inicializarCajaDeAhorroConAcuerdo(0);
+                                    fachada.inicializarCuentaCorrienteConAcuerdo(Convert.ToDouble(Console.ReadLine()));
+                                    fachada.inicializarCajaDeAhorroConAcuerdo(0);
                                     break;
                                 case 2:
                                     Console.Write("Ingrese el acuerdo de descubierto de la nueva cuenta: ");
-                                    iCuentas.cajaAhorro = fachada.inicializarCajaDeAhorroConAcuerdo(Convert.ToDouble(Console.ReadLine()));
-                                    iCuentas.cuentaCorriente = fachada.inicializarCuentaCorrienteConAcuerdo(0);
+                                    iAcuerdo = Convert.ToDouble(Console.ReadLine());
+                                    Console.Write("Ingrese el saldo de la nueva cuenta: ");
+                                    iSaldo = Convert.ToDouble(Console.ReadLine());
+                                    fachada.inicializarCuentaCorrienteConAcuerdoYSaldo(iAcuerdo, iSaldo);
+                                    fachada.inicializarCajaDeAhorroConAcuerdo(0);
                                     break;
                                 case 3:
+                                    Console.Write("Ingrese el acuerdo de descubierto de la nueva cuenta: ");
+                                    fachada.inicializarCajaDeAhorroConAcuerdo(Convert.ToDouble(Console.ReadLine()));
+                                    fachada.inicializarCuentaCorrienteConAcuerdo(0);
+                                    break;
+                                case 4:
                                     Console.Write("Ingrese el acuerdo de descubierto de la nueva cuenta: ");
                                     iAcuerdo = Convert.ToDouble(Console.ReadLine());
                                     Console.Write("Ingrese el saldo de la nueva cuenta: ");
                                     iSaldo = Convert.ToDouble(Console.ReadLine());
-                                    iCuentas.cajaAhorro = fachada.inicializarCajaDeAhorroConAcuerdoYSaldo(iAcuerdo, iSaldo);
-                                    iCuentas.cuentaCorriente = fachada.inicializarCuentaCorrienteConAcuerdo(0);
+                                    fachada.inicializarCajaDeAhorroConAcuerdoYSaldo(iAcuerdo, iSaldo);
+                                    fachada.inicializarCuentaCorrienteConAcuerdo(0);
+                                    break;
+                                default:
                                     break;
                             }
 
+                            Console.Clear();
                             pantallaDeSaldos();                             //fuera del main está esta pantalla que será utilizada en repetida ocasiones, y para ahorrar codigo se hizo de esta forma
                             int num = Convert.ToInt32(Console.ReadLine());
 
@@ -104,44 +107,44 @@ namespace Ejercicio2
                                 switch (num)
                                 {
                                     case 1:
-                                        mostrarSaldo(iCuentas.cuentaCorriente.saldo);       //este metodo ubicado fuera del main contiene una escritura en pantalla que se utiliza en repetidas ocasiones
-                                        mostrarAcuerdo(iCuentas.cuentaCorriente.acuerdo);   //este metodo ubicado fuera del main contiene una escritura en pantalla que se utiliza en repetidas ocasiones
+                                        mostrarSaldo(fachada.iCuentasDelCliente.cuentaCorriente.saldo);       
+                                        mostrarAcuerdo(fachada.iCuentasDelCliente.cuentaCorriente.acuerdo);   
                                         break;
                                     case 2:
-                                        mostrarSaldo(iCuentas.cajaAhorro.saldo);            
-                                        mostrarAcuerdo(iCuentas.cajaAhorro.acuerdo);
+                                        mostrarSaldo(fachada.iCuentasDelCliente.cajaAhorro.saldo);            
+                                        mostrarAcuerdo(fachada.iCuentasDelCliente.cajaAhorro.acuerdo);
                                         break;
                                     case 3:
                                         Console.WriteLine("Ingrese el valor a debitar");
-                                        iSaldo = fachada.debitarCuentaCorriente(Convert.ToDouble(Console.ReadLine()), iCuentas);
-                                        mostrarSaldo(iSaldo);
+                                        mostrarSaldo(fachada.debitarCuentaCorriente(Convert.ToDouble(Console.ReadLine())));
                                         break;
                                     case 4:
                                         Console.WriteLine("Ingrese el valor a debitar");
-                                        iSaldo = fachada.debitarCajaAhorro(Convert.ToDouble(Console.ReadLine()), iCuentas);
-                                        mostrarSaldo(iSaldo);
+                                        mostrarSaldo(fachada.debitarCajaAhorro(Convert.ToDouble(Console.ReadLine())));
                                         break;
                                     case 5:
                                         Console.WriteLine("Ingrese el valor a acreditar");
-                                        iSaldo = fachada.acreditarCuentaCorriente(Convert.ToDouble(Console.ReadLine()), iCuentas);
-                                        mostrarSaldo(iSaldo);
+                                        mostrarSaldo(fachada.acreditarCuentaCorriente(Convert.ToDouble(Console.ReadLine())));
                                         break;
                                     case 6:
                                         Console.WriteLine("Ingrese el valor a acreditar");
-                                        iSaldo = fachada.acreditarCajaAhorro(Convert.ToDouble(Console.ReadLine()), iCuentas);
-                                        mostrarSaldo(iSaldo);
+                                        mostrarSaldo(fachada.acreditarCajaAhorro(Convert.ToDouble(Console.ReadLine())));
                                         break;
                                     case 7:
                                         Console.WriteLine("Ingrese el nuevo monto del acuerdo de descubierto");
-                                        fachada.actualizarAcuerdo(iCuentas.cuentaCorriente);                       //este metodo modifica el acuerdo
+                                        fachada.actualizarAcuerdo(fachada.iCuentasDelCliente.cuentaCorriente);                       
                                         Console.WriteLine("Monto actualizado...");
                                         break;
                                     case 8:
                                         Console.WriteLine("Ingrese el nuevo monto del acuerdo de descubierto");
-                                        fachada.actualizarAcuerdo(iCuentas.cajaAhorro);                            //este metodo modifica el acuerdo
+                                        fachada.actualizarAcuerdo(fachada.iCuentasDelCliente.cajaAhorro);                            
                                         Console.WriteLine("Monto actualizado...");
                                         break;
+                                    default:
+                                        break;
                                 }
+                                Console.ReadKey();
+                                Console.Clear();
                                 pantallaDeSaldos();
                                 num = Convert.ToInt32(Console.ReadLine());
                             }
@@ -156,11 +159,17 @@ namespace Ejercicio2
             }
         }
 
+        /// <summary>
+        /// este metodo ubicado fuera del main contiene una escritura en pantalla que se utiliza en repetidas ocasiones
+        /// </summary>
         static void mostrarSaldo(double pSaldo)
         {
             Console.WriteLine("El saldo de la cuenta es: " + pSaldo);
         }
 
+        /// <summary>
+        /// este metodo ubicado fuera del main contiene una escritura en pantalla que se utiliza en repetidas ocasiones
+        /// </summary>
         static void mostrarAcuerdo(double pAcuerdo)
         {
             Console.WriteLine("El acuerdo de descubierto de la cuenta es: " + pAcuerdo);
