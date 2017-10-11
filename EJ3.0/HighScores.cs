@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ejercicio3
+namespace EJ3._0
 {
     /// <summary>
     /// Clase que se encarga de guardar y mostrar las 5 partidas de mejor tiempo

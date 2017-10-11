@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Ejercicio3
+namespace EJ3._0
 {
     /// <summary>
     /// Clase encargada de manejar la Partida en curso
